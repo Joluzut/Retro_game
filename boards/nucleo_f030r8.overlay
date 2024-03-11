@@ -1,0 +1,73 @@
+/*
+ * Copyright (c) JSC
+ *
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
+
+/ {
+	aliases {
+		led0 = 			&led0;
+		led1 = 			&led1;
+		led2 = 			&led2;
+		led3 = 			&led3;
+		button =		&button;
+		buttonxup = 	&buttonxup;
+		buttonxdown = 	&buttonxdown;
+		buttonyup = 	&buttonyup;
+		buttonydown = 	&buttonydown;
+	};
+
+	leds {		
+		compatible = "gpio-leds";
+		// Arduino port D13 (board led)
+		led0: led_0 {
+			gpios = <&gpiob 3 GPIO_ACTIVE_HIGH>;
+			label = "onboard led";
+		};
+		// Arduino pin A5: portc, pin 0 (external led)
+		led1: led_1 {
+			gpios = <&gpiob 5 GPIO_ACTIVE_HIGH>;
+			label = "HAT Pin A5 as LED";
+		};
+		// Arduino pin A4: portc, pin 1 (external led)
+		led2: led_2 {
+			gpios = <&gpiob 4 GPIO_ACTIVE_HIGH>;
+			label = "HAT Pin A4 as LED";
+		};
+		// Arduino pin A3: portb, pin 0 (external led)
+		led3: led_3 {
+			gpios = <&gpiob 6 GPIO_ACTIVE_HIGH>;
+			label = "HAT Pin A3 as LED";	
+		};
+	};
+
+
+   	buttons {
+   		compatible = "gpio-keys";
+   		button: button {
+   			gpios = < &gpiob 8 (GPIO_PULL_UP | GPIO_ACTIVE_LOW) >; // flag shout be (GPIO_PULL_UP | GPIO_ACTIVE_LOW)
+   			label = "button on b 8";
+   		};
+   		
+		buttonxup: buttonxup{		
+			gpios = < &gpioa 8 (GPIO_PULL_UP | GPIO_ACTIVE_LOW) >; // flag shout be (GPIO_PULL_UP | GPIO_ACTIVE_LOW)
+   			label = "button on a up";
+		};
+
+		buttonxdown: buttonxdown{
+			gpios = < &gpioa 9 (GPIO_PULL_UP | GPIO_ACTIVE_LOW) >; // flag shout be (GPIO_PULL_UP | GPIO_ACTIVE_LOW)
+   			label = "button on down";
+		};
+
+		buttonydown: buttonydown{
+			gpios = < &gpioc 7 (GPIO_PULL_UP | GPIO_ACTIVE_LOW) >; // flag shout be (GPIO_PULL_UP | GPIO_ACTIVE_LOW)
+   			label = "button on down";
+		};
+
+		buttonyup: buttonyup{
+			gpios = < &gpioa 6 (GPIO_PULL_UP | GPIO_ACTIVE_LOW) >; // flag shout be (GPIO_PULL_UP | GPIO_ACTIVE_LOW)
+   			label = "button on up";
+		};
+   	};
+ };
