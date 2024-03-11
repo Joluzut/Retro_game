@@ -41,45 +41,20 @@ void button_pressed(const struct device *dev, struct gpio_callback *cb, uint32_t
 	printk("Button pressed at %" PRIu32 "\n", k_cycle_get_32());
 }
 
-int main(void)
+void configuer()
 {
-	int ret;
-
-	if (!gpio_is_ready_dt(&button)) {
-		printk("Error: button device %s is not ready\n",
-		       button.port->name);
-		return 0;
-	}
-
-	ret = gpio_pin_configure_dt(&led0, GPIO_OUTPUT);
+	gpio_pin_configure_dt(&led0, GPIO_OUTPUT);
 	gpio_pin_configure_dt(&led1, GPIO_OUTPUT);
 	gpio_pin_configure_dt(&led2, GPIO_OUTPUT);
 	gpio_pin_configure_dt(&led3, GPIO_OUTPUT);
-	
 
 	gpio_pin_configure_dt(&buttonxup, GPIO_INPUT);
 	gpio_pin_configure_dt(&buttonxdown, GPIO_INPUT);
 	gpio_pin_configure_dt(&buttonyup, GPIO_INPUT);
 	gpio_pin_configure_dt(&buttonydown, GPIO_INPUT);
 
-	ret = gpio_pin_configure_dt(&button, GPIO_INPUT);
-	if (ret != 0) {
-		printk("Error %d: failed to configure %s pin %d\n",
-		       ret, button.port->name, button.pin);
-		return 0;
-	}
-
-	
-	printk("Set up button at %s pin %d\n", button.port->name, button.pin);
-	int previusState = 0;
-	int previusStatexup = 0;	
-	int previusStatexdown = 0;
-	int previusStateyup = 0;
-	int previusStateydown = 0;
-	int x = 0;
-	int y = 0;
-	while (1) {
-		
+}
+ void readButtons(){
 		int val = gpio_pin_get_dt(&button);
 		int standxup = gpio_pin_get_dt(&buttonxup);
 		int standxdown = gpio_pin_get_dt(&buttonxdown);
@@ -117,13 +92,45 @@ int main(void)
 			printk("Y down \n");
 			gpio_pin_toggle_dt( leds[3]);
 		}
-		previusState = val;
-		previusStatexup = 	standxup;
-		previusStatexdown = standxdown;
-		previusStateyup = 	standyup;
-		previusStateydown = standydown;
+		// previusState = val;
+		// previusStatexup = 	standxup;
+		// previusStatexdown = standxdown;
+		// previusStateyup = 	standyup;
+		// previusStateydown = standydown;
 
-		k_msleep(SLEEP_TIME_MS);			
+		k_msleep(SLEEP_TIME_MS);		
+}
+ 
+
+int main(void)
+{
+	configuer();
+	if (!gpio_is_ready_dt(&button)) {
+		printk("Error: button device %s is not ready\n",
+		       button.port->name);
+		return 0;
+	}
+
+	
+	ret = gpio_pin_configure_dt(&button, GPIO_INPUT);
+	if (ret != 0) {
+		printk("Error %d: failed to configure %s pin %d\n",
+		       ret, button.port->name, button.pin);
+		return 0;
+	}
+
+	
+	printk("Set up button at %s pin %d\n", button.port->name, button.pin);
+	// int previusState = 0;
+	// int previusStatexup = 0;	
+	// int previusStatexdown = 0;
+	// int previusStateyup = 0;
+	// int previusStateydown = 0;
+	// int x = 0;
+	// int y = 0;
+	while (1) {
+		readButtons();
+			
 	}	
 	return 0;
 }
