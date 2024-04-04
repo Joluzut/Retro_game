@@ -151,8 +151,6 @@ bool readBigButton()
 		previusStateBigButton = val;
 		return false;
 	}
-
-	
 }
 
 void readButtons()
