@@ -1,10 +1,14 @@
 #include "mainmenu.h"
 
+/**
+  * @brief Initalization of main menu screen. Writing the correct data of all text boxes
+  * @param none
+  * @returns none
+  * 
+  * 
+  */
 void mainMenu()
 {
-
-
-
 	writeBox(CONT_HP1,emptyChar);
 	writeBox(CONT_HP2,emptyChar);
 	writeBox(CONT_POWER,emptyChar);

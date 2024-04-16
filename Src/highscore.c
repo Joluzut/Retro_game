@@ -1,10 +1,16 @@
 #include "highscore.h"
 
-char highscore[15] = "500200100050025";
-char spelernamen[15] = "abcdefghijklmno";
-uint16_t intHighscores[5] = {500,200,100,50,25};
+char highscore[15] = "500200100050025";			//highscore save
+char spelernamen[15] = "abcdefghijklmno";		//highscore player names save
+uint16_t intHighscores[5] = {500,200,100,50,25};//highscore conversion to int 
 
-
+/**
+  * @brief shows current highscores on screen of certain line
+  * @param uint8_t line number
+  * @returns none
+  * 
+  * 
+  */
 void showScore(uint8_t regel){
 	uint8_t regel_offset = regel * 3;
 	char data[16] = "";
@@ -19,7 +25,13 @@ void showScore(uint8_t regel){
 	uint8_t container_regel = CONT_REGEL2 + regel;
 	writeBox(container_regel,data);
 }
-
+/**
+  * @brief Initalization of highscore menu screen
+  * @param none
+  * @returns none
+  * 
+  * 
+  */
 void highscoreMenu(){
 
 	writeBox(CONT_HP1,credits);
@@ -35,6 +47,14 @@ void highscoreMenu(){
 
 
 }
+/**
+  * @brief Update highscores with new entry
+  * @param char name of new entry
+  * @param uint8_t place of new entr
+  * @returns none
+  * 
+  * 
+  */
 void updateScore(char new_player[TEXT_SIZE], uint8_t place){
 	uint8_t hundreds ;
 	uint8_t tens ;
@@ -56,7 +76,13 @@ void updateScore(char new_player[TEXT_SIZE], uint8_t place){
 	spelernamen[new_place-1] = new_player[1];
 	spelernamen[new_place-2] = new_player[0];
 }
-
+/**
+  * @brief creates screen to input name of new score
+  * @param uint8_t place
+  * @returns none
+  * 
+  * 
+  */
 void inputName(uint8_t place){
 	char new_player[16] = "aaa";
 	writeBox(CONT_REGEL3,"enter name      "); // max 36
@@ -94,7 +120,13 @@ void inputName(uint8_t place){
 
 	updateScore(new_player, place);
 }
-
+/**
+  * @brief Compares new score with the highscores
+  * @param uint16_t new score
+  * @returns none
+  * 
+  * 
+  */
 void compareScores(uint16_t new_score){
 	uint16_t hundreds;
 	uint8_t tens;
@@ -122,7 +154,14 @@ void compareScores(uint16_t new_score){
 
 }
 
-
+/**
+  * @brief Change score of current player in the ongoing game
+  * @param uint8_t type of hit
+  * @param int16_t current score of player
+  * @returns int
+  * 
+  * 
+  */
 int changeScorePlayer(uint8_t hit_type,int16_t current_score){
 	int8_t scoreMod; // 1 = other // 2 = self // 3 = ground // 4 = screenboundaries
     if(hit_type == 1){
@@ -136,6 +175,14 @@ int changeScorePlayer(uint8_t hit_type,int16_t current_score){
     }
     return current_score + scoreMod;
 }
+/**
+  * @brief Change score of oponent in the ongoing game
+  * @param uint8_t type of hit
+  * @param int16_t current score of oponent
+  * @returns int
+  * 
+  * 
+  */
 int changeScoreOpponent(uint8_t hit_type,int16_t current_score){
 	int8_t scoreMod; // 1 = other // 2 = self // 3 = ground // 4 = screenboundaries
     if(hit_type == 1){
@@ -149,7 +196,14 @@ int changeScoreOpponent(uint8_t hit_type,int16_t current_score){
     }
     return current_score + scoreMod;
 }
-
+/**
+  * @brief Add bonus score at end of game based in played turns
+  * @param uint16_t turn game ended
+  * @param int16_t current score of winning player
+  * @returns int
+  * 
+  * 
+  */
 int addTurnScore(uint16_t turn_n,int16_t current_score){
 
 	return current_score + (600 - (turn_n * 20));

@@ -13,11 +13,29 @@ char power_box[16] = "kracht 25";
 char angle_box[16] = "hoek r 25";
 char turn_player[16] = "     turn p1";
 
+
+/**
+  * @brief Send spi data to write a character to specific spot in a letter box
+  * @param uint8_t lettergroup group data
+  * @param uint8_t location inside the letter box 
+  * @param uint8_t letter that has to be written
+  * @returns none
+  * 
+  * 
+  */
 void writeLetter(uint8_t groep, uint8_t locatie, uint8_t letter){
 	uint16_t totale_data = (groep << 12 | locatie << 8 | letter);
 	sendData(WRITE_LETTER,totale_data);
 }
 
+/**
+  * @brief Converts incoming char array to correct data for spi transfer
+  * @param uint8_t	lettergroup group data
+  * @param char	text 16 bits in size
+  * @returns none
+  * 
+  * 
+  */
 void writeBox(uint8_t groep, char tekst[16]){
 	char temp_tekst[16];
 	uint8_t letter;
@@ -57,7 +75,14 @@ void writeBox(uint8_t groep, char tekst[16]){
 	}
 	writeLetter(groep,15,0);
 }
-
+/**
+  * @brief Update the Health Points box
+  * @param uint8_t player of hp change
+  * @param uint8_t new hp number
+  * @returns none
+  * 
+  * 
+  */
 void updateWriteHP(uint8_t player_write, uint8_t new_hp){
 	uint8_t tens = new_hp/10;
 	uint8_t ones = new_hp%10;
@@ -101,6 +126,14 @@ void updateWriteHP(uint8_t player_write, uint8_t new_hp){
 		writeBox(CONT_HP2,hp_player2);
 	}
 }
+/**
+  * @brief Updates numbers in letterboxes of angle and power
+  * @param uint16_t current power
+  * @param uint16_t current angle
+  * @returns none
+  * 
+  * 
+  */
 void updateWriteShot(uint16_t current_power, int16_t current_angle){
 	int16_t tens = current_power/10;
 	int16_t ones = current_power%10;
@@ -141,6 +174,14 @@ void updateWriteShot(uint16_t current_power, int16_t current_angle){
 		}
 		writeBox(CONT_ANGLE,angle_box);
 }
+
+/**
+  * @brief Update letterbox to show the turn
+  * @param uint8_t	current player
+  * @returns none
+  * 
+  * 
+  */
 void updatePlayer(uint8_t current_player){
 	if(current_player == 0){
 		turn_player[11] = '1';

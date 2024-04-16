@@ -9,7 +9,14 @@
 #include "spiData.h"
 
 
-
+/**
+  * @brief SPI data transfer write function of 3 bytes 
+  * @param uint8_t address 
+  * @param uint16_t data
+  * @retval None
+  * 
+  * 
+  */
 void sendData(uint8_t address, uint16_t data)
 {
 			uint8_t bitData[3];

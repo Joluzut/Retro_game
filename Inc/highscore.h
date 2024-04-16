@@ -1,9 +1,10 @@
-/*
- * highscore.h
- *
- *  Created on: Apr 4, 2024
- *      Author: Tjebbe
- */
+/**
+  ******************************************************************************
+  * @file           : highscore.h
+  * @brief          : Header for highscore.c file.
+  *                   This file contains public funtions and variables 
+  ******************************************************************************
+  */
 
 #ifndef INC_HIGHSCORE_H_
 #define INC_HIGHSCORE_H_

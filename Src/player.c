@@ -13,6 +13,13 @@
 struct playerData player[2];
 int currentPlayer;
 
+/**
+  * @brief Generates random spawn for both players
+  * @param none
+  * @returns int
+  * 
+  * 
+  */
 int rndSpawn(){
 	HAL_ADC_Start(&hadc);
 	HAL_ADC_PollForConversion(&hadc, HAL_MAX_DELAY);
@@ -22,7 +29,13 @@ int rndSpawn(){
 	return startLocation;
 }
 
-
+/**
+  * @brief disable tank sprites of both players
+  * @param none
+  * @returns none
+  * 
+  * 
+  */
 void playerOff(){
 	player[0].posX = 10; //0b0000 0001 0011 0110
 	player[0].posY = 55000;
@@ -38,6 +51,14 @@ void playerOff(){
 
 
 }
+
+/**
+  * @brief Initalization of player data. 
+  * @param none
+  * @returns none
+  * 
+  * 
+  */
 void playerInit(){
 
 	player[0].posX = rndSpawn() * MAPSIZE; //0b0000 0001 0011 0110
@@ -78,6 +99,17 @@ void playerInit(){
 
 
 }
+
+/**
+  * @brief Movement function of player including collision with map. 
+  * Return 0 = player is on the map
+  * Return 1 = player 1 fell down the map
+  * Return 2 = player 2 fell down the map
+  * @param uint8_t current player
+  * @returns int
+  * 
+  * 
+  */
 int playerMovement(uint8_t current_player)
 {
 	int16_t tempPosY;

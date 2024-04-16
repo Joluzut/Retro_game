@@ -9,7 +9,7 @@
 #include "grondMap.h"
 
 
-
+//basic map if no random map generation
 uint8_t tileMap[TILEHEIGHT][TILEWIDTH] =
   {
 		  {0,0,0,0,0,0,0,0,0,0 ,0,0,0,0,0,0,0,0,0,0 ,0,0,0,0,0,0,0,0,0,0 ,0,0,0,0,0,0,0,0,0,0 ,0,0,0,0,0,0,0,0,0,0 ,0,0,0,0,0,0,0,0,0,0 ,0,0,0,0,0,0,0,0,0,0 ,0,0,0,0,0,0,0,0,0,0 },
@@ -52,7 +52,13 @@ uint8_t tileMap[TILEHEIGHT][TILEWIDTH] =
 
 
   };
-
+/**
+  * @brief Generates new random map
+  * @param none
+  * @returns none
+  * 
+  * 
+  */
 void genereateRandomMap(){
 	HAL_ADC_Start(&hadc);
 	HAL_ADC_PollForConversion(&hadc, HAL_MAX_DELAY);
@@ -84,7 +90,13 @@ void genereateRandomMap(){
 	}
 }
 
-
+/**
+  * @brief Show the map on screen
+  * @param none
+  * @returns none
+  * 
+  * 
+  */
 void mapDataStart(){
 
 	uint16_t totale_data;
@@ -103,7 +115,13 @@ void mapDataStart(){
 		}
 	}
 }
-
+/**
+  * @brief Turns off the map onscreen
+  * @param none
+  * @returns none
+  * 
+  * 
+  */
 void mapDataOff(){
 
 	uint16_t totale_data;
@@ -118,7 +136,14 @@ void mapDataOff(){
 		}
 	}
 }
-
+/**
+  * @brief Updates map on certain coordinates
+  * @param int x coordinate
+  * @param int y coordinate
+  * @returns none
+  * 
+  * 
+  */
 void mapDataUpdate(int x_data, int y_data){
 	uint16_t totale_data = (x_data << 9 | y_data << 4);
 	if(tileMap[y_data][x_data] == 0){

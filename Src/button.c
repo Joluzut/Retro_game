@@ -13,39 +13,26 @@ int previousButton[] = {0,0,0,0,0,0};
 int8_t buttonDPAD[] = {0,0,0,0,0,0};
 
 uint16_t buttons[6][2] = {
-		{BUTTON_GPIOB,GPIO_PIN_4},  	//left
-		{BUTTON_GPIOB,GPIO_PIN_6},  	//right
-		{BUTTON_GPIOC,GPIO_PIN_7},		//down
-		{BUTTON_GPIOB,GPIO_PIN_10},  	//up
+		{BUTTON_GPIOB,GPIO_PIN_4},  	//joystick x-axis left (-)
+		{BUTTON_GPIOB,GPIO_PIN_6},  	//joystick x-axis right (+)
+		{BUTTON_GPIOC,GPIO_PIN_7},		//joystick x-axis down (-)
+		{BUTTON_GPIOB,GPIO_PIN_10},  	//joystick x-axis up (+)
 		{BUTTON_GPIOA,GPIO_PIN_6},		//rechterknop
 		{BUTTON_GPIOB,GPIO_PIN_5}		//linkerknop
 
 };
 
-void buttonInit(){
 
 
-
-
-
-}
-
-
-
-
+/**
+  * @brief Reads input pins of STM32. Writes to external variables buttonDPAD[] and previousButton[]
+  * @param none
+  * @returns none
+  * 
+  * 
+  */
 void buttonRead()
 {
-//	uint16_t buttons[6][2] = {
-//			{GPIOB,GPIO_PIN_4},  	//left
-//			{GPIOB,GPIO_PIN_6},  	//right
-//			{GPIOC,GPIO_PIN_7},		//omlaag
-//			{GPIOB,GPIO_PIN_10},  	//omhoog
-//			{GPIOA,GPIO_PIN_6},		//linkerknop
-//			{GPIOB,GPIO_PIN_5}		//rechterknop
-//	};
-
-
-
 	for(int i = 0; i < 6; i++){
 		previousButton[i] = buttonDPAD[i];
 	}

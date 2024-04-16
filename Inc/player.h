@@ -14,7 +14,22 @@
 #include "letterBox.h"
 #include "spiData.h"
 
-
+/**
+  * @brief Struct of player data
+  * @param uint16_t	location x-axis
+  * @param uint16_t	location x-axis
+  * @param uint8_t	radius of player
+  * @param uint8_t	position of tank barrel
+  * @param uint8_t	direction tank is moving
+  * @param int8_t	speed of tank
+  * @param int8_t	velocity of tank X-axis
+  * @param int8_t	velocity of tank Y-axis
+  * @param int16_t	shot power
+  * @param int16_t	shot able
+  * @param uint8_t	health points of player
+  * @param int16_t	score of player
+  * @param bool		player in air = 1
+  */
 struct playerData{
 	uint16_t posX;
 	uint16_t posY;
