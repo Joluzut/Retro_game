@@ -54,7 +54,7 @@ void writeBox(uint8_t groep, char tekst[16]){
 	}
 	for(i=0;i<15;i++){
 		letter = 0;
-		for(j = 48;j<58;j++){
+		for(j = 48;j<58;j++){ //char conversion of numbers to spi data
 			if(temp_tekst[i] == 48){
 				letter = CHAR_0;
 			} else {
@@ -63,7 +63,7 @@ void writeBox(uint8_t groep, char tekst[16]){
 				}
 			}
 		}
-		for(j=97;j<123;j++){
+		for(j=97;j<123;j++){ //char conversion of letters to spi data
 			if(temp_tekst[i] == j){
 				letter = j-96;
 			}
@@ -73,7 +73,7 @@ void writeBox(uint8_t groep, char tekst[16]){
 		}
 	writeLetter(groep,i,letter);
 	}
-	writeLetter(groep,15,0);
+	writeLetter(groep,15,0);//last character of letterbox has to be empty // minor bug
 }
 /**
   * @brief Update the Health Points box

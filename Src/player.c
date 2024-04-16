@@ -61,8 +61,8 @@ void playerOff(){
   */
 void playerInit(){
 
-	player[0].posX = rndSpawn() * MAPSIZE; //0b0000 0001 0011 0110
-	player[0].posY = 20000;
+	player[0].posX = rndSpawn() * MAPSIZE;
+	player[0].posY = 20000; //default falling height
 	player[0].radius = 7;
 	player[0].speed = 1;
 	player[0].directionX = 1;
@@ -75,7 +75,7 @@ void playerInit(){
 	player[0].hp = 100;
 	player[0].score = 0;
 
-	player[1].posX = (rndSpawn()+500) * MAPSIZE; //0b0000 0001 0011 0110
+	player[1].posX = (rndSpawn()+500) * MAPSIZE;
 	player[1].posY = 20000;
 	player[1].radius = 7;
 	player[1].speed = 1;
@@ -144,7 +144,7 @@ int playerMovement(uint8_t current_player)
 			tempPosY = 0;
 		}
 		tileColY = ( ( tempPosY / MAPSIZE) + player[current_player].radius) / TILESIZE;
-		if(directionX == 1)
+		if(directionX == 1)//moving right
 		{
 			tileColX = ( (  player[current_player].posX / MAPSIZE ) + player[current_player].radius ) / TILESIZE;
 			if(tileMap[tileColY][tileColX] == 1 && tileColX < TILEWIDTH)
@@ -157,7 +157,7 @@ int playerMovement(uint8_t current_player)
 			}
 			modTileX = ( player[current_player].posX + ( MAPSIZE * player[current_player].radius ) ) % (TILESIZE * MAPSIZE);
 		}
-		else if(directionX == -1)
+		else if(directionX == -1)//moving left
 		{
 			tileColX = ( ( player[current_player].posX / MAPSIZE ) - player[current_player].radius ) / TILESIZE;
 			if(tileMap[tileColY][tileColX] == 1 && tileColX < TILEWIDTH)

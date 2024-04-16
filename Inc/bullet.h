@@ -1,4 +1,3 @@
-/* USER CODE BEGIN Header */
 /**
   ******************************************************************************
   * @file           : bullet.h
@@ -23,6 +22,18 @@
 #define MAX_FALLGRAVITY -3000 //max velocity of the bullet Y-axis
 #define STEP_SIZE 18 	//90deg/5 = 18. 5 sprites per 90 degrees 
 
+
+/**
+  * @brief Struct of player data
+  * @param int32_t	location x-axis
+  * @param int32_t	location x-axis
+  * @param bool		bullet collided
+  * @param int16_t	velocity of bullet X-axis
+  * @param int16_t	velocity of bullet Y-axis
+  * @param uint8_t	radius of bullet
+  * @param uint8_t	damage modifier of bullet
+  * @param uint8_t	explosion radius of bullet
+  */
 struct bulletData{
 	int32_t posX; 
 	int32_t posY;

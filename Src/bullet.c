@@ -145,13 +145,13 @@ void bulletUpdateBarrel(uint8_t current_player, int8_t directionX){
 
 	if(current_angle == 0){
 		rotation_barrel = 5;
-	} else if(current_angle > 0){ 
+	} else if(current_angle > 0){ //barrel in positive 90 degrees
 		for(int8_t i = 0; i < BARREL_STEPS;i++){
 			if(current_angle > i * STEP_SIZE && current_angle <= (i+1)*STEP_SIZE){
 				rotation_barrel = BARREL_STEPS - (i+1);
 			}
 		}
-	} else if(current_angle < 0){
+	} else if(current_angle < 0){ //barrel in negative 90 degreess
 		for(int8_t i = 0; i < BARREL_STEPS;i++){
 			if(current_angle < i * -STEP_SIZE && current_angle >= (i+1)*-STEP_SIZE){
 				rotation_barrel = BARREL_STEPS + (i+1);
@@ -182,7 +182,6 @@ int bulletLoop(uint8_t current_player){
 	other_player = (current_player+1)%2;
 	directionX = buttonDPAD[BUTTON_LEFT] + buttonDPAD[BUTTON_RIGHT];
 	directionY = buttonDPAD[BUTTON_DOWN] + buttonDPAD[BUTTON_UP];
-	int8_t oldAngle = player[current_player].angle;
 
 	if(stateBullet == GAME_BULLET_INIT_CALC){
 		stateBullet = GAME_BULLET_CALC;
@@ -190,7 +189,7 @@ int bulletLoop(uint8_t current_player){
 		if(directionX != 0 && (buttonDPAD[BUTTON_LEFT] != previousButton[BUTTON_LEFT] || buttonDPAD[BUTTON_RIGHT] != previousButton[BUTTON_RIGHT])){
 			player[current_player].angle = bulletAngle(player[current_player].angle,directionX);
 			updateWriteShot(player[current_player].power,player[current_player].angle);
-			bulletUpdateBarrel(current_player, oldAngle, directionX);
+			bulletUpdateBarrel(current_player, directionX);
 		}
 		if(directionY != 0 && (buttonDPAD[BUTTON_DOWN] != previousButton[BUTTON_DOWN] || buttonDPAD[BUTTON_UP] != previousButton[BUTTON_UP])){
 			player[current_player].power = bulletPower(player[current_player].power,directionY);
@@ -219,15 +218,15 @@ int bulletLoop(uint8_t current_player){
 			sendData(PLAYSOUND,SOUND_EXPLOSION);
 			sendData(PLAYSOUND,NO_DATA);
 
-			if(hitReturn != 4 && hitReturn != 3){ //only write 'hit' is a tank is hit
+			if(hitReturn != 4 && hitReturn != 3){ //only write 'hit' if a tank is hit
 				writeBox(CONT_REGEL2,hit_text);
 			}
-				if(player[0].hp <= 0){
-					return 2;
-				}
-				if(player[1].hp <= 0){
-					return 3;
-				}
+			if(player[0].hp <= 0){
+				return 2;
+			}
+			if(player[1].hp <= 0){
+				return 3;
+			}
 				
 			//put bullet in an position outside of the visible screen
 			bullet.posX = 10;
@@ -261,7 +260,7 @@ int bulletLoop(uint8_t current_player){
 	return 0;
 }
 /**
-  * @brief Calculates if bullet collides with a tank. 
+  * @brief Calculates if bullet collides with a tank. Circle - Circle detection
   * Return 0 = no hit
   * Return 1 = hit
   * @param uint8_t player/tank to compare to

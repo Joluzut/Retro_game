@@ -1,9 +1,10 @@
-/*
- * player.h
- *
- *  Created on: Mar 28, 2024
- *      Author: frenk
- */
+/**
+  ******************************************************************************
+  * @file           : player.h
+  * @brief          : Header for player.c file.
+  *                   This file contains the public variables and functions of the playable character.
+  ******************************************************************************
+  */
 
 #ifndef INC_PLAYER_H_
 #define INC_PLAYER_H_
@@ -34,9 +35,9 @@ struct playerData{
 	uint16_t posX;
 	uint16_t posY;
 	uint8_t radius;
-	uint8_t rotation; //45 degrees steps 0 == right 2 == down 4 == left 6 == up
+	uint8_t rotation;
 	uint8_t directionX; //direction where its looking at in case no input;
-	int8_t speed;	//10 default L/R MODifier
+	int8_t speed;	//1 default L/R MODifier
 	int8_t velX;
 	int8_t velY;
 	int16_t power;
